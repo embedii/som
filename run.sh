@@ -16,7 +16,7 @@ botmesg "Welcome $yourName how are you to day"
 
 if [ ! $(grep "firstrun" ~/$mp/info.txt) ];then
  botmesg "This first run i will load your work from google drive"
- . ~/./$path/gdrive/update.sh
+ . ~/./$path/ability/update/update.sh
  first
  echo "firstrun" >> ~/$mp/info.txt
 # count
@@ -26,7 +26,7 @@ if [ ! $(find ~/ -type d -name "Workspace") ];then
  botmesg "I found you here in the first time"  
  botmesg "Excuse me load your work from google drive in here"
 
- . ~/./$path/gdrive/update.sh
+ . ~/./$path/ability/update/update.sh
  first
 fi
  botmesg "Now my ability have check update your works"
