@@ -1,6 +1,6 @@
 #!/bin/bash
 
-import="import sys; sys.path.append('$fullpath/gdrive'); import gdrive;"
+import="import sys; sys.path.append('$fullpath/ability/update'); import gdrive;"
 mainid="1YaBmJqOTibixRAmMFZTINaweYGzXAk32"
 
 check() {

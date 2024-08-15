@@ -16,9 +16,9 @@ botmesg "Welcome $yourName how are you to day"
 
 if [ ! $(grep "firstrun" ~/$mp/info.txt) ];then
  botmesg "This first run i will load your work from google drive"
- . ~/./$path/ability/update/update.sh
+ source ~/$path/ability/update/update.sh
  first
- echo "firstrun" >> ~/$mp/info.txt
+ printf "firstrun\n" >> ~/$mp/info.txt
 # count
 fi
 
@@ -26,19 +26,19 @@ if [ ! $(find ~/ -type d -name "Workspace") ];then
  botmesg "I found you here in the first time"  
  botmesg "Excuse me load your work from google drive in here"
 
- . ~/./$path/ability/update/update.sh
+ source ~/$path/ability/update/update.sh
  first
 fi
  botmesg "Now my ability have check update your works"
 }
 
 run() {
- fullpath=$(find ~/ -type d -name "myai")
+ fullpath=$(find ~/ -type d -name "som")
 if [ "$USER" == "" ]
  then
-  path=$(echo $fullpath | grep -Po ".*/home/\K.*")
+  path=$(printf "%s" "$fullpath" | grep -Po ".*/home/\K.*")
  else
-  path=$(echo $fullpath | grep -Po ".*/home/[[:alpha:]]{1,}/\K.*")
+  path=$(printf "%s" "$fullpath" | grep -Po ".*/home/[[:alpha:]]{1,}/\K.*")
  fi 
 
  echo $fullpath
@@ -54,9 +54,10 @@ if [ "$USER" == "" ]
     read -e -p "$(botmesg "yourname?: ")" name
     read -e -p "$(botmesg "yourpassword?: ")" pass
    
-   echo "yourName=$name" >> ~/$mp/info.txt
-   echo "mypass=$pass" >> ~/$mp/info.txt
-   #firstrun=false
+   printf "yourName=%s\n" "$name" > ~/$mp/info.txt
+   printf "mypass=%s\n" "$pass" >> ~/$mp/info.txt
+   yourName=$name
+  #firstrun=false
    complet=true
    done
    set
