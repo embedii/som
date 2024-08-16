@@ -126,7 +126,7 @@ $(printf "%s" "$list" | grep -Po "'fileExtension': *\K'[^']*'" | grep -o "[^']*"
        then
         cf=($(printf "%s" "$chls" | grep -Po "'id': *\K'[^']*'" | grep -o "[^']*") 
             $(printf "%s" "$chls" | grep -Po "'name': *\K'[^']*'" | grep -o "[^']*") 
-            $(printf "s" "$chls" | grep -Po "'mimeType': *\K'[^']*'" | grep -o "[^']*") 
+            $(printf "%s" "$chls" | grep -Po "'mimeType': *\K'[^']*'" | grep -o "[^']*") 
 	    $(printf "%s" "$chls" | grep -Po "'fileExtension': *\K'[^']*'" | grep -o "[^']*"))
         cfi=$((${#cf[@]}/4))
 	q=$(($q+$cfi))
