@@ -10,9 +10,10 @@ from googleapiclient.http import MediaIoBaseDownload
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/drive"]
 driveid = '1YaBmJqOTibixRAmMFZTINaweYGzXAk32'
-mpath = subprocess.getoutput('find ~/ -type d -name "myai"')
-fpath = subprocess.getoutput('find ~/ -type d -name "Workspace" | grep -Po ".*[^Workspace]"')
-creds = service_account.Credentials.from_service_account_file(f'{mpath}/gdrive/service_account.json', scopes=SCOPES)
+mpath = subprocess.getoutput('find ~/ -type d -name "som"')
+wpath = subprocess.getoutput('find ~/ -type d -name "Workspace" | grep -Po ".*[^Workspace]"')
+serv = subprocess.getoutput('ls ~/som/ability/update/key/*.json')
+creds = service_account.Credentials.from_service_account_file(f'{serv}', scopes=SCOPES)
  
 def list(id):
  sv = build('drive', 'v3', credentials=creds)
@@ -46,7 +47,7 @@ def download(mtype,ext,file_id,fname,dire):
  if mtype == "application/vnd.google-apps.document":
   mtype = "text/plain"
   ext = "txt"
-  pat = fpath + dire + fname + "." + ext
+  pat = wpath + dire + fname + "." + ext
   file = io.BytesIO()
   request = sv.files().export_media(fileId=file_id, mimeType=mtype)
   downloader = MediaIoBaseDownload(file, request)
@@ -58,7 +59,7 @@ def download(mtype,ext,file_id,fname,dire):
   fh.write(file.getvalue())
   fh.close() 
  else:
-  pat = fpath + dire + fname + "." + ext
+  pat = wpath + dire + fname + "." + ext
   file = io.FileIO(pat,"wb")
   request = sv.files().get_media(fileId=file_id)
   downloader = MediaIoBaseDownload(file, request)

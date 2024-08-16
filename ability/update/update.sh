@@ -95,37 +95,24 @@ downloadd() {
 
 }
 
-tester() {
-tl=$(python3 -c "$import gdrive.list('$mainid')")
-echo $tl
-tf=($(echo $tl | grep -Po "'id': *\K'[^']*'" | grep -o "[^']*") 
-$(echo $tl | grep -Po "'name': *\K'[^']*'" | grep -o "[^']*") 
-$(echo $tl | grep -Po "'mimeType': *\K'[^']*'" | grep -o "[^']*") 
- $(echo $tl | grep -Po "'fileExtension': *\K'[^']*'" | grep -o "[^']*"))
- tfi=$((${#tf[@]}/4))
- for (( k=0; k<$tfi; k++ ))
-  do
-  echo "${tf[$k]} ${tf[$(($tfi+$k))]}"
-  done 
-}
 
 first() {
  patname=()
  patid=()
  list=$(python3 -c "$import gdrive.list('$mainid')")
-echo $list
- gf=($(echo $list | grep -Po "'id': *\K'[^']*'" | grep -o "[^']*") 
-$(echo $list | grep -Po "'name': *\K'[^']*'" | grep -o "[^']*") 
-$(echo $list | grep -Po "'mimeType': *\K'[^']*'" | grep -o "[^']*") 
-$(echo $list | grep -Po "'fileExtension': *\K'[^']*'" | grep -o "[^']*"))
+ printf "%s" "$list"
+ gf=($(printf "%s" "$list" | grep -Po "'id': *\K'[^']*'" | grep -o "[^']*") 
+$(printf "%s" "$list" | grep -Po "'name': *\K'[^']*'" | grep -o "[^']*") 
+$(printf "%s" "$list" | grep -Po "'mimeType': *\K'[^']*'" | grep -o "[^']*") 
+$(printf "%s" "$list" | grep -Po "'fileExtension': *\K'[^']*'" | grep -o "[^']*"))
  gfi=$((${#gf[@]}/4))
 
- mkdir Workspace
+ mkdir ~/Workspace
  for ((f=0; f<$gfi; f++))
   do	    
    q=1
    t=0
-   path="Workspace/"
+   path="~/Workspace/"
    cid=${gf[$f]}
    cname=${gf[$(($gfi+$f))]}
    ctype=${gf[$(($gfi+$gfi+$f))]}
@@ -137,10 +124,10 @@ $(echo $list | grep -Po "'fileExtension': *\K'[^']*'" | grep -o "[^']*"))
 
       if [ "$chls" != "[]" ]
        then
-        cf=($(echo $chls | grep -Po "'id': *\K'[^']*'" | grep -o "[^']*") 
-            $(echo $chls | grep -Po "'name': *\K'[^']*'" | grep -o "[^']*") 
-            $(echo $chls | grep -Po "'mimeType': *\K'[^']*'" | grep -o "[^']*") 
-	    $(echo $chls | grep -Po "'fileExtension': *\K'[^']*'" | grep -o "[^']*"))
+        cf=($(printf "%s" "$chls" | grep -Po "'id': *\K'[^']*'" | grep -o "[^']*") 
+            $(printf "%s" "$chls" | grep -Po "'name': *\K'[^']*'" | grep -o "[^']*") 
+            $(printf "s" "$chls" | grep -Po "'mimeType': *\K'[^']*'" | grep -o "[^']*") 
+	    $(printf "%s" "$chls" | grep -Po "'fileExtension': *\K'[^']*'" | grep -o "[^']*"))
         cfi=$((${#cf[@]}/4))
 	q=$(($q+$cfi))
 	t=0
