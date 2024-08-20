@@ -16,8 +16,9 @@ botmesg "Welcome $yourName how are you to day"
 
 if [ ! $(grep "firstrun" ~/$mp/info.txt) ];then
  botmesg "This first run i will load your work from google drive"
- source ~/$path/ability/update/update.sh
+ source ~/$mp/ability/update/update.sh
  first
+ make -C ~/$mp/ability/translate-shell install
  printf "firstrun\n" >> ~/$mp/info.txt
 # count
 fi
@@ -26,10 +27,11 @@ if [ ! $(find ~/ -type d -name "Workspace") ];then
  botmesg "I found you here in the first time"  
  botmesg "Excuse me load your work from google drive in here"
 
- source ~/$path/ability/update/update.sh
+ source ~/$mp/ability/update/update.sh
  first
 fi
- botmesg "Now my ability have check update your works"
+ botmesg "I have ability are there"
+ echo "$(ls ~/$mp/ability)"
 }
 
 run() {

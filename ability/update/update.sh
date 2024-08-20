@@ -112,7 +112,7 @@ $(printf "%s" "$list" | grep -Po "'fileExtension': *\K'[^']*'" | grep -o "[^']*"
   do	    
    q=1
    t=0
-   path="~/Workspace/"
+   path="Workspace/"
    cid=${gf[$f]}
    cname=${gf[$(($gfi+$f))]}
    ctype=${gf[$(($gfi+$gfi+$f))]}
@@ -138,7 +138,7 @@ $(printf "%s" "$list" | grep -Po "'fileExtension': *\K'[^']*'" | grep -o "[^']*"
       then
 	path+="$cname/"
 	echo "make dir $path "
-	mkdir -p $path
+	mkdir -p ~/$path
 
         patname+=("$path")
 	patid+=("$cid")
